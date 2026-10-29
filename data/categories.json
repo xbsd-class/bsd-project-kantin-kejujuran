@@ -1,7 +1,0 @@
-[
-  {"id":"makanan","name":"Makanan","isActive":true},
-  {"id":"minuman","name":"Minuman","isActive":true},
-  {"id":"alat-tulis","name":"Alat Tulis","isActive":true},
-  {"id":"perlengkapan-sekolah","name":"Perlengkapan Sekolah","isActive":true},
-  {"id":"lainnya","name":"Lainnya","isActive":true}
-]
