@@ -1,0 +1,14 @@
+{
+  "name": "Kantin Kejujuran",
+  "short_name": "Kantin Jujur",
+  "description": "Katalog dan pencatatan mandiri Kantin Kejujuran.",
+  "lang": "id-ID",
+  "start_url": "./index.html#/home",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f8f3",
+  "theme_color": "#18734a",
+  "icons": [
+    { "src": "./assets/images/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
