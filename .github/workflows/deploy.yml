@@ -1,0 +1,99 @@
+name: Validate and deploy Kantin Kejujuran
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil source code
+        uses: actions/checkout@v7
+
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Periksa struktur proyek
+        run: |
+          test -f index.html
+          test -d assets
+          test -d data
+          test -d scripts
+          test -d tests
+          echo "Struktur proyek lengkap."
+
+      - name: Periksa file JSON
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          files = sorted(Path("data").glob("*.json"))
+          if not files:
+              raise SystemExit("Tidak ada file JSON di folder data.")
+
+          for path in files:
+              try:
+                  json.loads(path.read_text(encoding="utf-8"))
+              except Exception as error:
+                  raise SystemExit(f"JSON bermasalah: {path}: {error}")
+              print(f"OK: {path}")
+          PY
+
+      - name: Periksa sintaks JavaScript
+        run: |
+          set -euo pipefail
+          find assets scripts tests -type f \
+            \( -name '*.js' -o -name '*.mjs' \) -print0 |
+            xargs -0 -r -n 1 node --experimental-default-type=module --check
+
+      - name: Jalankan tes proyek
+        run: |
+          node --experimental-default-type=module tests/smoke.mjs
+          node --experimental-default-type=module tests/dashboard-static-smoke.mjs
+          node --experimental-default-type=module tests/render-smoke.mjs
+
+  deploy:
+    needs: validate
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Ambil source code
+        uses: actions/checkout@v7
+
+      - name: Siapkan GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Paketkan website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "."
+
+      - name: Terbitkan website
+        id: deployment
+        uses: actions/deploy-pages@v4
