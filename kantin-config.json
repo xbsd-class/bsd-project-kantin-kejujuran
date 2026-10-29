@@ -1,0 +1,64 @@
+{
+  "brandName": "Kantin Kejujuran",
+  "tagline": "Ambil Sesuai Kebutuhan, Bayar Sesuai Kejujuran.",
+  "qrisImage": "assets/qris_kantin.jpg",
+  "whatsappNumber": "6281529958347",
+  "whatsappQrImage": "assets/whatsapp.",
+  "voucherCode": "SHELLBACK10",
+  "discountPercent": 10,
+  "lowStockThreshold": 5,
+  "products": [
+    {
+      "id": "gantungan-kunci",
+      "name": "Gantungan Kunci",
+      "description": "Souvenir kecil untuk menemani hari sekolahmu.",
+      "category": "Merchandise",
+      "price": 6000,
+      "unit": "pcs",
+      "stock": 9,
+      "initialStock": 9,
+      "active": true,
+      "art": "keychain",
+      "updatedAt": "2026-10-29T16:12:46.169Z"
+    },
+    {
+      "id": "bakpau-kacang-hijau",
+      "name": "Bakpau Kacang Hijau",
+      "description": "Bakpau lembut dengan isian kacang hijau.",
+      "category": "Makanan",
+      "price": 2000,
+      "unit": "pcs",
+      "stock": 20,
+      "initialStock": 20,
+      "active": true,
+      "art": "bun",
+      "updatedAt": "2026-10-29T16:12:46.169Z"
+    },
+    {
+      "id": "dimsum-sayur",
+      "name": "Dimsum Sayur",
+      "description": "Gigitan hangat dengan isian sayuran.",
+      "category": "Makanan",
+      "price": 2500,
+      "unit": "pcs",
+      "stock": 20,
+      "initialStock": 20,
+      "active": true,
+      "art": "dimsum",
+      "updatedAt": "2026-10-29T16:12:46.169Z"
+    },
+    {
+      "id": "jus-buah",
+      "name": "Jus Buah",
+      "description": "Minuman buah segar untuk menemani istirahat.",
+      "category": "Minuman",
+      "price": 6000,
+      "unit": "cup",
+      "stock": 20,
+      "initialStock": 20,
+      "active": true,
+      "art": "juice",
+      "updatedAt": "2026-10-29T16:12:46.169Z"
+    }
+  ]
+}
